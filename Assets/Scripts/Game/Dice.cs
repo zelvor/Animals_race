@@ -41,9 +41,9 @@ public class Dice : MonoBehaviour {
         {
             GameController.MovePlayer(2);
         }
-        playerTurn++;
-        if (playerTurn > 2)
-            playerTurn = 1;
+        // playerTurn++;
+        // if (playerTurn > 2)
+        //     playerTurn = 1;
         coroutineAllowed = true;
     }
 }

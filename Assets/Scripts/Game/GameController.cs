@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour
 {
     public static GameObject player1;
     public static GameObject player2;
+
     public static bool gameOver = false;
     public static int diceSideThrown = 0;
 
@@ -22,13 +23,20 @@ public class GameController : MonoBehaviour
         player2.GetComponent<Movement>().waypointIndex = 0;
         player1.GetComponent<Movement>().playerStartWaypoint = 0;
         player2.GetComponent<Movement>().playerStartWaypoint = 0;
+        player1.GetComponent<Movement>().playerLabel = 1;
+        player2.GetComponent<Movement>().playerLabel = 2;
 
     }
     void Update()
     {
-
-        player1.GetComponent<Movement>().CheckStopMove();
-        player2.GetComponent<Movement>().CheckStopMove();
+        if (player1.GetComponent<Movement>().moveAllowed)
+            player1.GetComponent<Movement>().CheckStopMove();
+        else if (player1.GetComponent<Movement>().moveBackAllowed)
+            player1.GetComponent<Movement>().CheckStopMoveBack();
+        if (player2.GetComponent<Movement>().moveAllowed)
+            player2.GetComponent<Movement>().CheckStopMove();
+        else if (player2.GetComponent<Movement>().moveBackAllowed)
+            player2.GetComponent<Movement>().CheckStopMoveBack();
 
         
         if (player1.GetComponent<Movement>().waypointIndex >=

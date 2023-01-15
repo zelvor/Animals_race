@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
     public int waypointIndex = 0;
     public bool moveAllowed = false;
     public bool moveBackAllowed = false;
+    public int playerLabel;
 
     public int playerStartWaypoint = 0;
     void Start()
@@ -59,20 +60,30 @@ public class Movement : MonoBehaviour
     }
 
     public void CheckItem(){
+        
         if (DoubleWaypoint(playerStartWaypoint)){
             Debug.Log("Double");
             moveAllowed = true;
-        } else if (BonusTurnWaypoint(playerStartWaypoint)){
-            Debug.Log("Bonus");
-            Dice.playerTurn--;
-        }  else if (Minus3Waypoint(playerStartWaypoint)){
-            moveBackAllowed = true;
-            if (waypointIndex < playerStartWaypoint - 1){
-                playerStartWaypoint = waypointIndex - 1;
-                Debug.Log(playerStartWaypoint);
-                Debug.Log(waypointIndex);
-                moveBackAllowed = false;
+        }
+        if (BonusTurnWaypoint(playerStartWaypoint)){
+            Debug.Log("Bonus Turn");
+            Dice.playerTurn = playerLabel;
+        } else {
+            Dice.playerTurn = playerLabel + 1;
+            if (Dice.playerTurn > 2){
+                Dice.playerTurn = 1;
             }
+        }
+        if (Minus3Waypoint(playerStartWaypoint)){
+            moveBackAllowed = true;
+        }
+        
+    }
+
+    public void CheckStopMoveBack(){
+        if (waypointIndex < playerStartWaypoint - 1){
+                moveBackAllowed = false;
+                playerStartWaypoint = waypointIndex - 1;
         }
     }
 
@@ -84,7 +95,7 @@ public class Movement : MonoBehaviour
     }
 
     private static bool Minus3Waypoint(int position){
-        if (position == 20 || position == 28){
+        if (position == 5|| position == 20 || position == 28){
             return true;
         }
         return false;
