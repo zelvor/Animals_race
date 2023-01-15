@@ -51,6 +51,22 @@ public class GameController : MonoBehaviour
 
         if (player2.GetComponent<Movement>().moveAllowed == true){
             StopMovePlayer2();
+        } else {
+            if (DoubleWaypoint(player2StartWaypoint)){
+                Debug.Log("Double");
+                player2.GetComponent<Movement>().moveAllowed = true;
+            } else if (BonusTurnWaypoint(player2StartWaypoint)){
+                Debug.Log("Bonus");
+                Dice.playerTurn = 2;
+            } else if (Minus3Waypoint(player2StartWaypoint)){
+                player2.GetComponent<Movement>().moveBackAllowed = true;
+                if (player2.GetComponent<Movement>().waypointIndex < player2StartWaypoint - 1){
+                    player2StartWaypoint = player2.GetComponent<Movement>().waypointIndex - 1;
+                    Debug.Log(player2StartWaypoint);
+                    Debug.Log(player2.GetComponent<Movement>().waypointIndex);
+                    player2.GetComponent<Movement>().moveBackAllowed = false;
+                }
+            }
         }
         
 
@@ -102,7 +118,7 @@ public class GameController : MonoBehaviour
 
 
     private static bool DoubleWaypoint(int position){
-        if (position == 8){
+        if (position == 8 || position == 16){
             return true;
         }
         return false;
@@ -116,7 +132,7 @@ public class GameController : MonoBehaviour
     }
 
     private static bool BonusTurnWaypoint(int position){
-        if (position == 12){
+        if (position == 12 || position == 24 || position == 36){
             return true;
         }
         return false;
