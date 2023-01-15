@@ -36,6 +36,8 @@ public class Movement : MonoBehaviour
             if (transform.position == waypoints[waypointIndex].transform.position)
             {
                 waypointIndex += 1;
+                //adding sound
+                GetComponent<AudioSource>().Play();
             }
         }
     }       
@@ -47,6 +49,7 @@ public class Movement : MonoBehaviour
             if (transform.position == waypoints[waypointIndex-2].transform.position)
             {
                 waypointIndex -= 1;
+                GetComponent<AudioSource>().Play();
             }
         }
     }
@@ -95,7 +98,7 @@ public class Movement : MonoBehaviour
     }
 
     private static bool Minus3Waypoint(int position){
-        if (position == 5|| position == 20 || position == 28){
+        if (position == 20 || position == 28){
             return true;
         }
         return false;
