@@ -37,7 +37,7 @@ public class Movement : MonoBehaviour
             {
                 waypointIndex += 1;
                 //adding sound
-                GetComponent<AudioSource>().Play();
+                
             }
         }
     }       
@@ -49,7 +49,7 @@ public class Movement : MonoBehaviour
             if (transform.position == waypoints[waypointIndex-2].transform.position)
             {
                 waypointIndex -= 1;
-                GetComponent<AudioSource>().Play();
+           
             }
         }
     }
@@ -73,7 +73,7 @@ public class Movement : MonoBehaviour
             Dice.playerTurn = playerLabel;
         } else {
             Dice.playerTurn = playerLabel + 1;
-            if (Dice.playerTurn > 2){
+            if (Dice.playerTurn > GameController.maxPlayers){
                 Dice.playerTurn = 1;
             }
         }

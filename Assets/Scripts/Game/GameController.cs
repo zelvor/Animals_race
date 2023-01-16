@@ -6,9 +6,10 @@ public class GameController : MonoBehaviour
 {
     public static GameObject player1;
     public static GameObject player2;
-
     public static bool gameOver = false;
     public static int diceSideThrown = 0;
+
+    public static int maxPlayers = 2;
 
     void Start()
     {
