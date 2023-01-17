@@ -90,22 +90,23 @@ public class Movement : MonoBehaviour
         }
     }
 
+
     private static bool DoubleWaypoint(int position){
-        if (position == 8 || position == 16){
+        if (position == 8 || position == 16 || position == 26 || position == 33 || position == 42 || position == 47){
             return true;
         }
         return false;
     }
 
     private static bool Minus3Waypoint(int position){
-        if (position == 20 || position == 28){
+        if (position == 10 || position == 14 || position == 20 || position == 28 || position == 38 || position == 43 || position == 51 ){
             return true;
         }
         return false;
     }
 
     private static bool BonusTurnWaypoint(int position){
-        if (position == 12 || position == 24 || position == 36){
+        if (position == 12 || position == 24 || position == 32 || position == 36 || position == 45){
             return true;
         }
         return false;

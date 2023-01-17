@@ -17,9 +17,10 @@ public class Dice : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        if (!GameController.gameOver && coroutineAllowed)
+        if (!GameController.gameOver && coroutineAllowed){
             StartCoroutine("RollTheDice");
-            GetComponent<AudioSource>().Play();      
+            GetComponent<AudioSource>().Play();
+        }
     }
 
     private IEnumerator RollTheDice()

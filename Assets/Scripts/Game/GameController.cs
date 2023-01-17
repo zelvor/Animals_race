@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public static int diceSideThrown = 0;
 
     public static int maxPlayers = 2;
+    public static int winnerPlayer;
 
     void Start()
     {
@@ -44,11 +45,13 @@ public class GameController : MonoBehaviour
             player1.GetComponent<Movement>().waypoints.Length)
         {
             gameOver = true;
+            winnerPlayer = 1;
         }
         if (player2.GetComponent<Movement>().waypointIndex >=
             player2.GetComponent<Movement>().waypoints.Length)
         {
             gameOver = true;
+            winnerPlayer = 2;
         }      
     }
 
