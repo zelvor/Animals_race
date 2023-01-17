@@ -14,15 +14,45 @@ public class UIController : MonoBehaviour
 
     public TextMeshProUGUI WinnerPlayer;
 
+    public GameObject P1;
+    public GameObject P2;
+    public GameObject P3;
+    public GameObject P4;
+
+
+
     void Start()
     {
         //Set the icon position to the position of the icon
         iconPosition = GameObject.Find("IconPosition").transform.position;
         //Set the outside position to the position of the outside position
         outsidePosition = GameObject.Find("OutsidePosition").transform.position;
-        //disable WinnerPlayer
         WinnerPlayer.enabled = false;
-    
+
+        P1.SetActive(false);
+        P2.SetActive(false);
+        P3.SetActive(false);
+        // P4.SetActive(false);
+        
+        //set all player active false
+        for (int i = 1; i <= MenuController.numberOfPlayers; i++)
+        {
+            switch (i)
+            {
+                case 1:
+                    P1.SetActive(true);
+                    break;
+                case 2:
+                    P2.SetActive(true);
+                    break;
+                case 3:
+                    P3.SetActive(true);
+                    break;
+                case 4:
+                    P4.SetActive(true);
+                    break;
+            }
+        }
     }
     void Update(){
         //Get player turn
@@ -41,6 +71,7 @@ public class UIController : MonoBehaviour
         if (GameController.gameOver)
         {
             WinnerPlayer.text = "Player " + GameController.winnerPlayer + " Wins!";
+            //set WinnerPlayer to active
             WinnerPlayer.enabled = true;
         }
 

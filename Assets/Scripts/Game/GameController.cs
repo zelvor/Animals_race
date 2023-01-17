@@ -4,68 +4,60 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+
     public static GameObject player1;
     public static GameObject player2;
+    public static GameObject player;
+
     public static bool gameOver = false;
     public static int diceSideThrown = 0;
 
-    public static int maxPlayers = 2;
+    public static int maxPlayers;
     public static int winnerPlayer;
 
     void Start()
     {
-        player1 = GameObject.Find("Player 1");
-        player2 = GameObject.Find("Player 2");
-
-        player1.GetComponent<Movement>().moveAllowed = false;
-        player2.GetComponent<Movement>().moveAllowed = false;
-        player1.GetComponent<Movement>().moveBackAllowed = false;
-        player2.GetComponent<Movement>().moveBackAllowed = false;
-        player1.GetComponent<Movement>().waypointIndex = 0;
-        player2.GetComponent<Movement>().waypointIndex = 0;
-        player1.GetComponent<Movement>().playerStartWaypoint = 0;
-        player2.GetComponent<Movement>().playerStartWaypoint = 0;
-        player1.GetComponent<Movement>().playerLabel = 1;
-        player2.GetComponent<Movement>().playerLabel = 2;
+        maxPlayers = MenuController.numberOfPlayers;
+        for (int i = 0; i < maxPlayers; i++)
+        {
+            //find player
+            player = GameObject.Find("Player " + (i + 1));
+            //set player label
+            player.GetComponent<Movement>().playerLabel = i + 1;
+            player.GetComponent<Movement>().waypointIndex = 0;
+            player.GetComponent<Movement>().playerStartWaypoint = 0;
+            player.GetComponent<Movement>().moveAllowed = false;
+            player.GetComponent<Movement>().moveBackAllowed = false;
+        }
 
     }
     void Update()
     {
-        if (player1.GetComponent<Movement>().moveAllowed)
-            player1.GetComponent<Movement>().CheckStopMove();
-        else if (player1.GetComponent<Movement>().moveBackAllowed)
-            player1.GetComponent<Movement>().CheckStopMoveBack();
-        if (player2.GetComponent<Movement>().moveAllowed)
-            player2.GetComponent<Movement>().CheckStopMove();
-        else if (player2.GetComponent<Movement>().moveBackAllowed)
-            player2.GetComponent<Movement>().CheckStopMoveBack();
-
-        
-        if (player1.GetComponent<Movement>().waypointIndex >=
-            player1.GetComponent<Movement>().waypoints.Length)
+        if (gameOver)
         {
-            gameOver = true;
-            winnerPlayer = 1;
+            Debug.Log("Game Over");
+            Debug.Log("Player " + winnerPlayer + " Wins!");
         }
-        if (player2.GetComponent<Movement>().waypointIndex >=
-            player2.GetComponent<Movement>().waypoints.Length)
+
+        for (int i = 0; i < maxPlayers; i++)
         {
-            gameOver = true;
-            winnerPlayer = 2;
-        }      
+            if (GameObject.Find("Player " + (i + 1)).GetComponent<Movement>().moveAllowed)
+                GameObject.Find("Player " + (i + 1)).GetComponent<Movement>().CheckStopMove();
+            else if (GameObject.Find("Player " + (i + 1)).GetComponent<Movement>().moveBackAllowed)
+                GameObject.Find("Player " + (i + 1)).GetComponent<Movement>().CheckStopMoveBack();
+            if (GameObject.Find("Player " + (i + 1)).GetComponent<Movement>().waypointIndex >=
+                GameObject.Find("Player " + (i + 1)).GetComponent<Movement>().waypoints.Length)
+            {
+                gameOver = true;
+                winnerPlayer = i + 1;
+            }
+        }
     }
 
 
     public static void MovePlayer(int player)
-    {
-        if (player == 1)
-        {
-            player1.GetComponent<Movement>().moveAllowed = true;
-        }
-        else if (player == 2)
-        {
-            player2.GetComponent<Movement>().moveAllowed = true;
-        }
+    {   
+        GameObject.Find("Player " + player).GetComponent<Movement>().moveAllowed = true;
     }
 
 }
