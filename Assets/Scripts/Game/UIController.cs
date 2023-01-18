@@ -11,7 +11,6 @@ public class UIController : MonoBehaviour
     private Vector3 outsidePosition;
     //TMP text
     public TextMeshProUGUI PlayerTurnText;
-
     public TextMeshProUGUI WinnerPlayer;
 
     public GameObject P1;
@@ -33,6 +32,13 @@ public class UIController : MonoBehaviour
         P2.SetActive(false);
         P3.SetActive(false);
         // P4.SetActive(false);
+
+        //Set player name
+        P1.GetComponentInChildren<TextMeshProUGUI>().text = MenuController.p1NameText;
+        P2.GetComponentInChildren<TextMeshProUGUI>().text = MenuController.p2NameText;
+        P3.GetComponentInChildren<TextMeshProUGUI>().text = MenuController.p3NameText;
+        P4.GetComponentInChildren<TextMeshProUGUI>().text = MenuController.p4NameText;
+
         
         //set all player active false
         for (int i = 1; i <= MenuController.numberOfPlayers; i++)

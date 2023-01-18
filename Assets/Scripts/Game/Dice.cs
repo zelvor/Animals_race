@@ -36,16 +36,7 @@ public class Dice : MonoBehaviour {
         coroutineAllowed = true;
 
         GameController.diceSideThrown = randomDiceSide + 1;
-        if (playerTurn == 1){
-            GameController.MovePlayer(1);
-        }
-        else if (playerTurn == 2)
-        {
-            GameController.MovePlayer(2);
-        }
-        // playerTurn++;
-        // if (playerTurn > 2)
-        //     playerTurn = 1;
+        GameController.MovePlayer(playerTurn);
         coroutineAllowed = true;
     }
 }

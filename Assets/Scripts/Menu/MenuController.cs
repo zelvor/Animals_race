@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,26 +5,84 @@ public class MenuController : MonoBehaviour
 {
     public InputField inputField;
     public static int numberOfPlayers = 2;
-    // button Play, load Game scene
-    public void Play()
+
+    public GameObject p1Name;
+    public GameObject p2Name;
+    public GameObject p3Name;
+    public GameObject p4Name;
+
+    public static string p1NameText;
+    public static string p2NameText;
+    public static string p3NameText;
+    public static string p4NameText;
+
+    void Start()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
+        //set all player name input field inactive
+        p1Name.SetActive(false);
+        p2Name.SetActive(false);
+        p3Name.SetActive(false);
+        p4Name.SetActive(false);
     }
 
     public void GetNumberOfPlayers()
     {
-        numberOfPlayers = int.Parse(inputField.text);
-        Debug.Log(numberOfPlayers);
-        //if numberOfPlayers from 1 to 4, then load Game scene
-        if (numberOfPlayers >= 1 && numberOfPlayers <= 4)
+        //check if input is valid
+        if (CheckNumberOfPlayers())
         {
-            Play();
-        }else{
-            Debug.Log("Number of players must be from 1 to 4");
-            //Input field is empty
+            //set number of players
+            numberOfPlayers = int.Parse(inputField.text);
+        }
+        else
+        {
+            Debug.Log("Invalid number of players");
             inputField.text = "";
         }
     }
+    public bool CheckNumberOfPlayers()
+    {
+        if (numberOfPlayers > 4 || numberOfPlayers < 2)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
+    public void ShowPlayerInput(){
+        //active player name input field
+        for (int i = 1; i <= numberOfPlayers; i++)
+        {
+            switch (i)
+            {
+                case 1:
+                    p1Name.SetActive(true);
+                    break;
+                case 2:
+                    p2Name.SetActive(true);
+                    break;
+                case 3:
+                    p3Name.SetActive(true);
+                    break;
+                case 4:
+                    p4Name.SetActive(true);
+                    break;
+            }
+        }
+    }
 
+    public void SetPlayerName(){
+        //set player name
+        p1NameText = p1Name.transform.GetChild(1).GetComponent<InputField>().text;
+        p2NameText = p2Name.transform.GetChild(1).GetComponent<InputField>().text;
+        p3NameText = p3Name.transform.GetChild(1).GetComponent<InputField>().text;
+        p4NameText = p4Name.transform.GetChild(1).GetComponent<InputField>().text;
+    }
+
+    public void LoadScene(){
+        //load scene
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
+    }
 }

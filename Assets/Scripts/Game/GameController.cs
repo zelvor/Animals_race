@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-
-    public static GameObject player1;
-    public static GameObject player2;
     public static GameObject player;
 
     public static bool gameOver = false;
