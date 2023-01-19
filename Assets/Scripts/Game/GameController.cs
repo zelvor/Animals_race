@@ -25,6 +25,12 @@ public class GameController : MonoBehaviour
             player.GetComponent<Movement>().playerStartWaypoint = 0;
             player.GetComponent<Movement>().moveAllowed = false;
             player.GetComponent<Movement>().moveBackAllowed = false;
+        }   
+
+        //disable others
+        for (int i = maxPlayers; i < 4; i++)
+        {
+            GameObject.Find("Player " + (i + 1)).SetActive(false);
         }
 
     }

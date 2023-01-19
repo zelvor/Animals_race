@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
-    public InputField inputField;
     public static int numberOfPlayers = 2;
 
     public GameObject p1Name;
@@ -25,32 +24,22 @@ public class MenuController : MonoBehaviour
         p4Name.SetActive(false);
     }
 
-    public void GetNumberOfPlayers()
+    public void GetNumberOfPlayers(int val)
     {
-        //check if input is valid
-        if (CheckNumberOfPlayers())
+        //get number of players from dropdown
+        if (val == 0)
         {
-            //set number of players
-            numberOfPlayers = int.Parse(inputField.text);
+            numberOfPlayers = 2;
         }
-        else
+        else if (val == 1)
         {
-            Debug.Log("Invalid number of players");
-            inputField.text = "";
+            numberOfPlayers = 3;
+        }
+        else if (val == 2)
+        {
+            numberOfPlayers = 4;
         }
     }
-    public bool CheckNumberOfPlayers()
-    {
-        if (numberOfPlayers > 4 || numberOfPlayers < 2)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-
     public void ShowPlayerInput(){
         //active player name input field
         for (int i = 1; i <= numberOfPlayers; i++)

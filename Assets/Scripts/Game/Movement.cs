@@ -10,7 +10,6 @@ public class Movement : MonoBehaviour
     public bool moveAllowed = false;
     public bool moveBackAllowed = false;
     public int playerLabel;
-    public string playerName = "No Name";
     public int playerStartWaypoint = 0;
     void Start()
     {

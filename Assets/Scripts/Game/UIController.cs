@@ -31,13 +31,13 @@ public class UIController : MonoBehaviour
         P1.SetActive(false);
         P2.SetActive(false);
         P3.SetActive(false);
-        // P4.SetActive(false);
+        P4.SetActive(false);
 
         //Set player name
-        P1.GetComponentInChildren<TextMeshProUGUI>().text = MenuController.p1NameText;
-        P2.GetComponentInChildren<TextMeshProUGUI>().text = MenuController.p2NameText;
-        P3.GetComponentInChildren<TextMeshProUGUI>().text = MenuController.p3NameText;
-        P4.GetComponentInChildren<TextMeshProUGUI>().text = MenuController.p4NameText;
+        P1.GetComponentInChildren<TextMeshProUGUI>().text = "P1: " + MenuController.p1NameText;
+        P2.GetComponentInChildren<TextMeshProUGUI>().text = "P2: " + MenuController.p2NameText;
+        P3.GetComponentInChildren<TextMeshProUGUI>().text = "P3: " + MenuController.p3NameText;
+        P4.GetComponentInChildren<TextMeshProUGUI>().text = "P4: " + MenuController.p4NameText;
 
         
         //set all player active false
@@ -64,7 +64,11 @@ public class UIController : MonoBehaviour
         //Get player turn
         int playerTurn = Dice.playerTurn;
         GameObject.Find("P" + playerTurn).transform.position = iconPosition;
+        //show player turn = name's turn
         PlayerTurnText.text = "Player " + playerTurn + "'s Turn";
+
+
+
         // all other players is outside the screen
         for (int i = 1; i <= GameController.maxPlayers; i++)
         {
