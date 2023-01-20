@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
     public static int maxPlayers;
     public static int winnerPlayer;
 
+    public GameObject scoreBoard;
+
     void Start()
     {
         maxPlayers = MenuController.numberOfPlayers;
@@ -40,6 +42,9 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("Game Over");
             Debug.Log("Player " + winnerPlayer + " Wins!");
+            //Show Scoreboard
+            scoreBoard.SetActive(true);
+
         }
 
         for (int i = 0; i < maxPlayers; i++)
