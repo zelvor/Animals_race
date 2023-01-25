@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MenuController : MonoBehaviour
 {
@@ -63,11 +64,11 @@ public class MenuController : MonoBehaviour
     }
 
     public void SetPlayerName(){
-        //set player name
-        p1NameText = p1Name.transform.GetChild(1).GetComponent<InputField>().text;
-        p2NameText = p2Name.transform.GetChild(1).GetComponent<InputField>().text;
-        p3NameText = p3Name.transform.GetChild(1).GetComponent<InputField>().text;
-        p4NameText = p4Name.transform.GetChild(1).GetComponent<InputField>().text;
+        //set player name from input field TMPro
+        p1NameText = p1Name.transform.GetChild(1).GetComponent<TMP_InputField>().text;
+        p2NameText = p2Name.transform.GetChild(1).GetComponent<TMP_InputField>().text;
+        p3NameText = p3Name.transform.GetChild(1).GetComponent<TMP_InputField>().text;
+        p4NameText = p4Name.transform.GetChild(1).GetComponent<TMP_InputField>().text;
     }
 
     public void LoadScene(){

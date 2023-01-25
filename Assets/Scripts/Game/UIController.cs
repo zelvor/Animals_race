@@ -11,14 +11,9 @@ public class UIController : MonoBehaviour
     private Vector3 outsidePosition;
     //TMP text
     public TextMeshProUGUI PlayerTurnText;
-    public TextMeshProUGUI WinnerPlayer;
 
-    public GameObject P1;
-    public GameObject P2;
-    public GameObject P3;
-    public GameObject P4;
-
-
+    public GameObject player;
+    public GameObject playerGhost;
 
     void Start()
     {
@@ -26,48 +21,27 @@ public class UIController : MonoBehaviour
         iconPosition = GameObject.Find("IconPosition").transform.position;
         //Set the outside position to the position of the outside position
         outsidePosition = GameObject.Find("OutsidePosition").transform.position;
-        WinnerPlayer.enabled = false;
 
-        P1.SetActive(false);
-        P2.SetActive(false);
-        P3.SetActive(false);
-        P4.SetActive(false);
-
-        //Set player name
-        P1.GetComponentInChildren<TextMeshProUGUI>().text = "P1: " + MenuController.p1NameText;
-        P2.GetComponentInChildren<TextMeshProUGUI>().text = "P2: " + MenuController.p2NameText;
-        P3.GetComponentInChildren<TextMeshProUGUI>().text = "P3: " + MenuController.p3NameText;
-        P4.GetComponentInChildren<TextMeshProUGUI>().text = "P4: " + MenuController.p4NameText;
-
-        
-        //set all player active false
-        for (int i = 1; i <= MenuController.numberOfPlayers; i++)
+        for (int i = 0; i < MenuController.numberOfPlayers; i++)
         {
-            switch (i)
-            {
-                case 1:
-                    P1.SetActive(true);
-                    break;
-                case 2:
-                    P2.SetActive(true);
-                    break;
-                case 3:
-                    P3.SetActive(true);
-                    break;
-                case 4:
-                    P4.SetActive(true);
-                    break;
-            }
+            player = GameObject.Find("Player " + (i + 1));
+            playerGhost = GameObject.Find("P" + (i+1) + "_Ghost");
+            playerGhost.GetComponentInChildren<TextMeshProUGUI>().text = player.GetComponent<Movement>().playerName;
         }
+
+        //set active false for all other players
+        for (int i = MenuController.numberOfPlayers; i < 4; i++)
+        {
+            GameObject.Find("P" + (i+1) + "_Ghost").SetActive(false);
+        }
+
     }
     void Update(){
         //Get player turn
         int playerTurn = Dice.playerTurn;
         GameObject.Find("P" + playerTurn).transform.position = iconPosition;
         //show player turn = name's turn
-        PlayerTurnText.text = "Player " + playerTurn + "'s Turn";
-
-
+        PlayerTurnText.text = GameObject.Find("Player " + playerTurn).GetComponent<Movement>().playerName + "'s turn";
 
         // all other players is outside the screen
         for (int i = 1; i <= GameController.maxPlayers; i++)
@@ -76,15 +50,6 @@ public class UIController : MonoBehaviour
             {
                 GameObject.Find("P" + i).transform.position = outsidePosition;
             }
-        }
-
-        if (GameController.gameOver)
-        {
-            WinnerPlayer.text = "Player " + GameController.winnerPlayer + " Wins!";
-            //set WinnerPlayer to active
-            WinnerPlayer.enabled = true;
-        }
-
-        
+        }      
     }
 }

@@ -8,13 +8,11 @@ public class GameController : MonoBehaviour
 
     public static bool gameOver = false;
     public static int diceSideThrown = 0;
-
     public static int maxPlayers;
     public static int winnerPlayer;
-
     public GameObject scoreBoard;
 
-    void Start()
+    void Awake()
     {
         maxPlayers = MenuController.numberOfPlayers;
         for (int i = 0; i < maxPlayers; i++)
@@ -44,13 +42,14 @@ public class GameController : MonoBehaviour
             }
         }   
     
-        
-
         //disable others
         for (int i = maxPlayers; i < 4; i++)
         {
             GameObject.Find("Player " + (i + 1)).SetActive(false);
         }
+
+
+
 
     }
     void Update()
