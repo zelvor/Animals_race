@@ -14,7 +14,7 @@ public class ScoreUI : MonoBehaviour
 
         for (int i = 0; i < GameController.maxPlayers; i++){
             player = GameObject.Find("Player " + (i + 1));
-            scoreManager.AddScore(new Score("Player " + (i + 1), player.GetComponent<Movement>().waypointIndex-1));
+            scoreManager.AddScore(new Score(player.GetComponent<Movement>().playerName, player.GetComponent<Movement>().waypointIndex-1));
         }
 
         var scores = scoreManager.GetScores().ToArray();

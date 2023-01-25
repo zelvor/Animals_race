@@ -27,7 +27,24 @@ public class GameController : MonoBehaviour
             player.GetComponent<Movement>().playerStartWaypoint = 0;
             player.GetComponent<Movement>().moveAllowed = false;
             player.GetComponent<Movement>().moveBackAllowed = false;
+            switch (i)
+            {
+                case 0:
+                    player.GetComponent<Movement>().playerName = MenuController.p1NameText;
+                    break;
+                case 1:
+                    player.GetComponent<Movement>().playerName = MenuController.p2NameText;
+                    break;
+                case 2:
+                    player.GetComponent<Movement>().playerName = MenuController.p3NameText;
+                    break;
+                case 3:
+                    player.GetComponent<Movement>().playerName = MenuController.p4NameText;
+                    break;
+            }
         }   
+    
+        
 
         //disable others
         for (int i = maxPlayers; i < 4; i++)

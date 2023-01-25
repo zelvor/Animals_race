@@ -74,4 +74,9 @@ public class MenuController : MonoBehaviour
         //load scene
         UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
     }
+
+    public void QuitGame(){
+        //quit game
+        Application.Quit();
+    }
 }
