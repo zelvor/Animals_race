@@ -1,1 +1,1 @@
-A Project Dice Game for Saritasa Test!
+A dice race board game project for Saritasa Test!
