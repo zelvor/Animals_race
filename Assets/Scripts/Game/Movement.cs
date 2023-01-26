@@ -11,7 +11,6 @@ public class Movement : MonoBehaviour
     public bool moveBackAllowed = false;
     public int playerLabel;
     public int playerStartWaypoint = 0;
-
     public string playerName;
     void Start()
     {

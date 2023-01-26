@@ -47,10 +47,6 @@ public class GameController : MonoBehaviour
         {
             GameObject.Find("Player " + (i + 1)).SetActive(false);
         }
-
-
-
-
     }
     void Update()
     {

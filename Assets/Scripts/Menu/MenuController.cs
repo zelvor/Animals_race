@@ -70,7 +70,7 @@ public class MenuController : MonoBehaviour
         p3NameText = p3Name.transform.GetChild(1).GetComponent<TMP_InputField>().text;
         p4NameText = p4Name.transform.GetChild(1).GetComponent<TMP_InputField>().text;
     }
-
+    
     public void LoadScene(){
         //load scene
         UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
