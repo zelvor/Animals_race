@@ -159,3 +159,4 @@ MonoBehaviour:
   moveBackAllowed: 0
   playerLabel: 0
   playerStartWaypoint: 0
+  playerName: 

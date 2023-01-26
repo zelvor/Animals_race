@@ -8,6 +8,8 @@ public class Dice : MonoBehaviour {
     private bool coroutineAllowed = true;
     public static int playerTurn = 1;
 
+    public bool isRolling = false;
+
 	// Use this for initialization
 	private void Start () {
         rend = GetComponent<SpriteRenderer>();
@@ -17,7 +19,8 @@ public class Dice : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        if (!GameController.gameOver && coroutineAllowed){
+        isRolling = IsMoving();
+        if (!GameController.gameOver && coroutineAllowed && !isRolling){
             StartCoroutine("RollTheDice");
             GetComponent<AudioSource>().Play();
         }
@@ -38,5 +41,14 @@ public class Dice : MonoBehaviour {
         GameController.diceSideThrown = randomDiceSide + 1;
         GameController.MovePlayer(playerTurn);
         coroutineAllowed = true;
+    }
+
+    public bool IsMoving(){
+        for (int i = 0; i < GameController.maxPlayers; i++)
+        {
+            if (GameObject.Find("Player " + (i + 1)).GetComponent<Movement>().moveAllowed)
+                return true;
+        }
+        return false;
     }
 }

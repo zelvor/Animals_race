@@ -7,11 +7,9 @@ public class ScoreUI : MonoBehaviour
 {
     public RowUI rowUI;
     public ScoreManager scoreManager;
-
     private static GameObject player;
 
     void Start(){
-
         for (int i = 0; i < GameController.maxPlayers; i++){
             player = GameObject.Find("Player " + (i + 1));
             scoreManager.AddScore(new Score(player.GetComponent<Movement>().playerName, player.GetComponent<Movement>().waypointIndex-1));
@@ -26,4 +24,6 @@ public class ScoreUI : MonoBehaviour
             row.score.text = scores[i].score.ToString();
         }
     }
+
+
 }

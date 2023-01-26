@@ -11,9 +11,12 @@ public class GameController : MonoBehaviour
     public static int maxPlayers;
     public static int winnerPlayer;
     public GameObject scoreBoard;
+    private bool isPlayingAudio = false;
+
 
     void Awake()
     {
+        gameOver = false;
         maxPlayers = MenuController.numberOfPlayers;
         for (int i = 0; i < maxPlayers; i++)
         {
@@ -55,10 +58,17 @@ public class GameController : MonoBehaviour
             Debug.Log("Game Over");
             Debug.Log("Player " + winnerPlayer + " Wins!");
             //Show Scoreboard
+            //add sound
             scoreBoard.SetActive(true);
+            if (!isPlayingAudio)
+            {
+                GetComponent<AudioSource>().Play();
+                isPlayingAudio = true;
+            }
 
         }
-
+        else
+        {
         for (int i = 0; i < maxPlayers; i++)
         {
             if (GameObject.Find("Player " + (i + 1)).GetComponent<Movement>().moveAllowed)
@@ -72,6 +82,7 @@ public class GameController : MonoBehaviour
                 winnerPlayer = i + 1;
             }
         }
+        }
     }
 
 
@@ -79,5 +90,5 @@ public class GameController : MonoBehaviour
     {   
         GameObject.Find("Player " + player).GetComponent<Movement>().moveAllowed = true;
     }
-
+    
 }
