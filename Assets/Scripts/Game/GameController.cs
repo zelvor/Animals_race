@@ -7,15 +7,15 @@ public class GameController : MonoBehaviour
     public static GameObject player;
 
     public static bool gameOver = false;
-    public static int diceSideThrown = 0;
+    public static int diceSideThrown;
     public static int maxPlayers;
-    public static int winnerPlayer;
     public GameObject scoreBoard;
     private bool isPlayingAudio = false;
 
     void Awake()
     {
         gameOver = false;
+        diceSideThrown = 0;
         maxPlayers = MenuController.numberOfPlayers;
         for (int i = 0; i < maxPlayers; i++)
         {
@@ -54,10 +54,6 @@ public class GameController : MonoBehaviour
     {
         if (gameOver)
         {
-            Debug.Log("Game Over");
-            Debug.Log("Player " + winnerPlayer + " Wins!");
-            //Show Scoreboard
-            //add sound
             scoreBoard.SetActive(true);
             if (!isPlayingAudio)
             {
@@ -78,16 +74,38 @@ public class GameController : MonoBehaviour
                 GameObject.Find("Player " + (i + 1)).GetComponent<Movement>().waypoints.Length)
             {
                 gameOver = true;
-                winnerPlayer = i + 1;
             }
         }
         }
     }
-
-
     public static void MovePlayer(int player)
     {   
         GameObject.Find("Player " + player).GetComponent<Movement>().moveAllowed = true;
+    }
+
+    public void ReplayGame(){
+        //Destroy rows in Content in scoreBoard
+        foreach (Transform child in scoreBoard.transform.Find("Content"))
+        {
+            Destroy(child.gameObject);
+        }
+        scoreBoard.SetActive(false);
+        // Set all players to start
+        for (int i = 0; i < maxPlayers; i++)
+        {
+            player = GameObject.Find("Player " + (i + 1));
+            player.GetComponent<Movement>().waypointIndex = 0;
+            player.GetComponent<Movement>().moveAllowed = false;
+            player.GetComponent<Movement>().moveBackAllowed = false;
+        }
+        // Move all players to start
+        for (int i = 0; i < maxPlayers; i++)
+        {
+            player = GameObject.Find("Player " + (i + 1));
+            player.transform.position = player.GetComponent<Movement>().waypoints[0].transform.position;
+        }
+        gameOver = false;
+        isPlayingAudio = false;
     }
     
 }
