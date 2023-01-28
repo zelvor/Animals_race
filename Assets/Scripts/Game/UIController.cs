@@ -42,7 +42,6 @@ public class UIController : MonoBehaviour
         GameObject.Find("P" + playerTurn).transform.position = iconPosition;
         //show player turn = name's turn
         PlayerTurnText.text = GameObject.Find("Player " + playerTurn).GetComponent<Movement>().playerName + "'s turn";
-
         // all other players is outside the screen
         for (int i = 1; i <= GameController.maxPlayers; i++)
         {

@@ -26,7 +26,6 @@ public class Movement : MonoBehaviour
         if (moveBackAllowed){
             MoveBack();
         }
-        
     }
 
     private void Move(){
@@ -35,9 +34,7 @@ public class Movement : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position,waypoints[waypointIndex].transform.position,moveSpeed * Time.deltaTime);            
             if (transform.position == waypoints[waypointIndex].transform.position)
             {
-                waypointIndex += 1;
-                //adding sound
-                
+                waypointIndex += 1;    
             }
         }
     }       
@@ -49,7 +46,6 @@ public class Movement : MonoBehaviour
             if (transform.position == waypoints[waypointIndex-2].transform.position)
             {
                 waypointIndex -= 1;
-           
             }
         }
     }
@@ -63,7 +59,6 @@ public class Movement : MonoBehaviour
     }
 
     public void CheckItem(){
-        
         if (DoubleWaypoint(playerStartWaypoint)){
             Debug.Log("Double");
             moveAllowed = true;
@@ -90,23 +85,28 @@ public class Movement : MonoBehaviour
         }
     }
 
-
     private bool DoubleWaypoint(int position){
-        if (position == 8 || position == 16 || position == 26 || position == 33 || position == 42 || position == 47){
+        //list of waypoints that doubles the dice
+        List<int> doubleList = new List<int> {8, 16, 26, 33, 42, 47};
+        if (doubleList.Contains(position)){
             return true;
         }
         return false;
     }
 
     private bool Minus3Waypoint(int position){
-        if (position == 10 || position == 14 || position == 20 || position == 28 || position == 38 || position == 43 || position == 51 ){
+        //list of waypoints that minus 3 from dice
+        List<int> minus3List = new List<int> {10, 14, 20, 28, 38, 43, 51};
+        if (minus3List.Contains(position)){
             return true;
         }
         return false;
     }
 
     private bool BonusTurnWaypoint(int position){
-        if (position == 12 || position == 24 || position == 32 || position == 36 || position == 45){
+        //list of waypoints that gives bonus turn
+        List<int> bonusTurnList = new List<int> {12, 24, 32, 36, 45};
+        if (bonusTurnList.Contains(position)){
             return true;
         }
         return false;

@@ -13,7 +13,6 @@ public class GameController : MonoBehaviour
     public GameObject scoreBoard;
     private bool isPlayingAudio = false;
 
-
     void Awake()
     {
         gameOver = false;

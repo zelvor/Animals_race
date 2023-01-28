@@ -5,7 +5,6 @@ using UnityEngine;
 public class Continue : MonoBehaviour
 {
     // Press anywhere to continue
-
     public GameObject scoreBoard;
 
     void Update()
