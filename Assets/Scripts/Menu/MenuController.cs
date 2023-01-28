@@ -4,7 +4,7 @@ using TMPro;
 
 public class MenuController : MonoBehaviour
 {
-    public static int numberOfPlayers = 2;
+    public static int numberOfPlayers;
 
     public GameObject p1Name;
     public GameObject p2Name;
@@ -18,6 +18,7 @@ public class MenuController : MonoBehaviour
 
     void Start()
     {
+        numberOfPlayers = 2;
         //set all player name input field inactive
         p1Name.SetActive(false);
         p2Name.SetActive(false);
@@ -40,6 +41,7 @@ public class MenuController : MonoBehaviour
         {
             numberOfPlayers = 4;
         }
+        // Debug.Log(numberOfPlayers);
     }
     public void ShowPlayerInput(){
         //active player name input field
