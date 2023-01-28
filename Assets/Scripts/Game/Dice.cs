@@ -15,6 +15,7 @@ public class Dice : MonoBehaviour {
         rend = GetComponent<SpriteRenderer>();
         diceSides = Resources.LoadAll<Sprite>("DiceSides/");
         rend.sprite = diceSides[5];
+        playerTurn = 1;
 	}
 
     private void OnMouseDown()
